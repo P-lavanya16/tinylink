@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TinyLink</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mt-20 bg-white p-10 rounded-xl shadow">
+    <h1 class="text-3xl font-bold mb-5">TinyLink URL Shortener</h1>
+
+    <input id="urlInput" type="text" class="border p-2 w-full rounded" placeholder="Enter long URL..." />
+
+    <button onclick="shorten()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Shorten</button>
+
+    <p id="result" class="mt-4 font-semibold"></p>
+  </div>
+
+<script>
+async function shorten() {
+  const url = document.getElementById("urlInput").value;
+
+  const res = await fetch("/api/shorten", {
+    method: "POST",
+    body: JSON.stringify({ url })
+  });
+
+  const data = await res.json();
+  document.getElementById("result").innerHTML =
+    `Short URL: <a class="text-blue-600" href="https://${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
+}
+</script>
+
+</body>
+</html>
