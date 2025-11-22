@@ -1,19 +1,7 @@
 {
   "version": 3,
-  "functions": {
-    "api/*.js": { "runtime": "vercel-node@3" }
-  },
   "routes": [
-    { "src": "/api/shorten", "dest": "/api/shorten.js" },
-    { "src": "/api/redirect", "dest": "/api/redirect.js" },
-    { "src": "/api/stat/(.*)", "dest": "/api/stat.js" },
-
-    { "src": "/healthz", "dest": "/api/index.js" },
-
-    { "src": "/code/(.*)", "dest": "/index.html" },
-
-    { "src": "/([A-Za-z0-9]{6,8})", "dest": "/api/redirect.js" },
-
+    { "src": "/api/(.*)", "dest": "/api/$1.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
